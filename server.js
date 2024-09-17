@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const http = require('http');
 const { Server } = require('socket.io');
 const connectDB = require('./config/db');
+const cors = require('cors');
 
 
 dotenv.config();
@@ -11,6 +12,10 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+app.use(cors({
+  origin: 'http://localhost:3000', 
+}));
 
 app.use(express.json());
 

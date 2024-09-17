@@ -1,10 +1,11 @@
-// src/components/Auth/Login.js
 import React, { useState } from 'react';
 import api from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -13,11 +14,25 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Send login request
       const res = await api.post('/auth/login', formData);
-      localStorage.setItem('token', res.data.token);
-      setMessage('Login successful!');
+
+      // Ensure res.data contains the token and username
+      if (res.data && res.data.token) {
+        localStorage.setItem('token', res.data.token); // Store token
+        localStorage.setItem('username', res.data.username); // Store username
+        setMessage('Login successful! Redirecting to home...');
+        navigate('/'); // Redirect to homepage after login
+      } else {
+        setMessage('Login failed: No token received.');
+      }
     } catch (error) {
-      setMessage('Error during login: ' + error.response.data.message);
+      // Handle errors
+      if (error.response && error.response.data && error.response.data.message) {
+        setMessage('Error: ' + error.response.data.message);
+      } else {
+        setMessage('An error occurred during login.');
+      }
     }
   };
 

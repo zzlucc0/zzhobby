@@ -1,10 +1,11 @@
-// src/components/Auth/Register.js
 import React, { useState } from 'react';
 import api from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
   const [message, setMessage] = useState('');
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,10 +15,21 @@ function Register() {
     e.preventDefault();
     try {
       const res = await api.post('/auth/register', formData);
-      localStorage.setItem('token', res.data.token);
-      setMessage('Registration successful! You are now logged in.');
+
+      if (res.data && res.data.token) {
+        localStorage.setItem('token', res.data.token); 
+        setMessage('Registration successful! Redirecting to home...');
+        navigate('/'); 
+      } else {
+        setMessage('Registration failed: No token received.');
+      }
     } catch (error) {
-      setMessage('Error during registration: ' + error.response.data.message);
+
+      if (error.response && error.response.data && error.response.data.message) {
+        setMessage('Error: ' + error.response.data.message);
+      } else {
+        setMessage('An error occurred during registration.');
+      }
     }
   };
 
