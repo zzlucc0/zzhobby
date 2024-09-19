@@ -8,22 +8,24 @@ body {
 }
 
 .header {
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: #f8f9fa; */
   background-color: #e0f7fa; /* Light and fresh color */
+  /* background-image: url("../public/images/logo.png");  */
+  background-size: cover; /* Stretch the logo to cover the entire header */
+  background-repeat: no-repeat; /* Prevent repeating if cover is used */
+  background-position: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  height: 80px;
+  height: 120px;
 }
 
 .logo {
   width: 150px;
   height: auto;
+  position: absolute;
+  top: 0.05px;
+  left: 28%;
 }
 
 .user-info {
