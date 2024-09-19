@@ -15,16 +15,13 @@
 /* Modal content styling */
 .ReactModal__Content {
   position: relative;
-  width: 100%;
-  max-width: 400px; 
-  max-height: 90vh; 
+  max-width: 400px; /* Max width for the modal */
+  max-height: 90vh; /* Ensure it fits within the screen */
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  z-index: 1001; 
-  overflow-y: auto; 
-  outline: none; 
+  overflow-y: auto; /* Scroll if content exceeds height */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
 /* Button styling */

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination,Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -40,8 +40,8 @@ function HomePage() {
           </div>
         ) : (
           <div className="auth-buttons">
-            <Login />  {/* Display Login Modal */}
-            <Register /> {/* Display Register Modal */}
+            <Login />  
+            <Register /> 
           </div>
         )}
       </header>
@@ -53,6 +53,10 @@ function HomePage() {
           navigation
           pagination={{ clickable: true }}
           className="swiper-container"
+          autoplay={{ delay: 10000, disableOnInteraction: false }}
+          loop={true} 
+          modules={[Navigation, Pagination, Autoplay]}
+          
         >
           {modelImages.map((image, index) => (
             <SwiperSlide key={index}>
