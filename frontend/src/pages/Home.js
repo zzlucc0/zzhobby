@@ -1,47 +1,65 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './HomePage.css'; // Import CSS for styling
+import { useNavigate } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import Login from '../components/Auth/Login'; // Import Login
+import Register from '../components/Auth/Register'; // Import Register
+
+const modelImages = [
+  "/images/model_kit_1.webp",
+  "/images/model_kit_2.webp",
+  "/images/model_kit_3.webp"
+];
 
 function HomePage() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const username = localStorage.getItem('username'); // Get stored username
+  const username = localStorage.getItem('username');
 
-  // Handle logout function
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('username'); // Clear username
+    localStorage.removeItem('username');
     alert('Logged out successfully');
-    navigate('/'); // Redirect to home
+    window.location.reload();
   };
 
   return (
     <div className="homepage">
       <header className="header">
-        <img src="/path/to/logo.png" alt="Logo" className="logo" />
-        <h1>Welcome to My Sharing Platform</h1>
-        {token && (
+        <img src="/images/logo.png" alt="Logo" className="logo" />
+        <h1>Welcome to ZzHobby</h1>
+        {token ? (
           <div className="user-info">
             <span className="welcome-text">Welcome, {username}</span>
             <button className="btn logout-btn" onClick={handleLogout}>
               Logout
             </button>
           </div>
+        ) : (
+          <div className="auth-buttons">
+            <Login />  {/* Display Login Modal */}
+            <Register /> {/* Display Register Modal */}
+          </div>
         )}
       </header>
       <div className="main-content">
-        {!token ? (
-          <div className="auth-buttons">
-            <Link to="/login">
-              <button className="btn">Login</button>
-            </Link>
-            <Link to="/register">
-              <button className="btn">Sign Up</button>
-            </Link>
-          </div>
-        ) : (
-          <img src="/path/to/homepage-image.png" alt="Homepage Visual" className="homepage-image" />
-        )}
+        <h2>Model Kit Showcase</h2>
+        <Swiper
+          spaceBetween={30}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true }}
+          className="swiper-container"
+        >
+          {modelImages.map((image, index) => (
+            <SwiperSlide key={index}>
+              <img src={image} alt={`Model Kit ${index + 1}`} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

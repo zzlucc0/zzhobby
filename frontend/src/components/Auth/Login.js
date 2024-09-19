@@ -1,64 +1,81 @@
 import React, { useState } from 'react';
-import api from '../../api';
-import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
+import './Modal.css'; // Custom CSS for modal styling
+
+Modal.setAppElement('#root'); // Accessibility feature to avoid issues with screen readers
 
 function Login() {
+  const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
 
+  // Toggle modal open/close
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send login request
-      const res = await api.post('/auth/login', formData);
+      // Replace with your backend API endpoint
+      const response = await fetch('http://localhost:5000/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      // Ensure res.data contains the token and username
-      if (res.data && res.data.token) {
-        localStorage.setItem('token', res.data.token); // Store token
-        localStorage.setItem('username', res.data.username); // Store username
-        setMessage('Login successful! Redirecting to home...');
-        navigate('/'); // Redirect to homepage after login
+      const data = await response.json();
+
+      if (response.ok) {
+        // Assume the backend sends back a token and username
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('username', data.username);
+        setMessage('Login successful');
+        toggleModal();
+        window.location.reload(); // Reload to update login status
       } else {
-        setMessage('Login failed: No token received.');
+        setMessage(data.message || 'Invalid email or password');
       }
     } catch (error) {
-      // Handle errors
-      if (error.response && error.response.data && error.response.data.message) {
-        setMessage('Error: ' + error.response.data.message);
-      } else {
-        setMessage('An error occurred during login.');
-      }
+      setMessage('Login failed. Please try again later.');
     }
   };
 
   return (
     <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-      {message && <p>{message}</p>}
+      <button onClick={toggleModal} className="btn">Login</button>
+      <Modal isOpen={isOpen} onRequestClose={toggleModal} contentLabel="Login Modal">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+        {message && <p>{message}</p>}
+        <button onClick={toggleModal} className="btn">Close</button>
+      </Modal>
     </div>
   );
 }
