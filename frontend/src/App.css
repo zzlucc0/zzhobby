@@ -8,11 +8,17 @@ body {
 }
 
 .header {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: #f8f9fa; */
+  background-color: #e0f7fa; /* Light and fresh color */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  height: 80px;
 }
 
 .logo {
@@ -30,18 +36,24 @@ body {
 
 .welcome-text {
   font-size: 1.2rem;
-  margin-right: 20px;
+  margin-left: 20px;
   color: #333;
 }
 
 .logout-btn {
   padding: 10px 15px;
+  margin-left: 20px;
   background-color: #dc3545;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 15px;
 }
 
 .logout-btn:hover {
@@ -75,4 +87,11 @@ body {
   width: 100%;
   height: auto;
   object-fit: cover; 
+}
+
+.welcome{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination,Autoplay } from 'swiper/modules';
@@ -15,9 +15,15 @@ const modelImages = [
 ];
 
 function HomePage() {
-  const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const username = localStorage.getItem('username');
+  // const username = localStorage.getItem('username');
+  const [username, setUsername] = useState(null);
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -30,10 +36,10 @@ function HomePage() {
     <div className="homepage">
       <header className="header">
         <img src="/images/logo.png" alt="Logo" className="logo" />
-        <h1>Welcome to ZzHobby</h1>
+        <h1 className="welcome">Welcome to ZzHobby</h1>
         {token ? (
           <div className="user-info">
-            <span className="welcome-text">Welcome, {username}</span>
+            <span className="welcome-text">Hi, {username}</span>
             <button className="btn logout-btn" onClick={handleLogout}>
               Logout
             </button>
