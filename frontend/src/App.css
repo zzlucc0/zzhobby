@@ -44,6 +44,22 @@ body {
   margin-left: 20px;
   color: #333;
 }
+.input-login{
+  border: none;
+  width: 25rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #e8e8e8;
+  box-shadow: 20px 20px 60px #c5c5c5, -20px -20px 60px #ffffff;
+  transition: 0.3s;
+}
+.input-login:focus {
+  outline-color: #e8e8e8;
+  background: #e8e8e8;
+  box-shadow: inset 20px 20px 60px #c5c5c5,
+     inset -20px -20px 60px #ffffff;
+  transition: 0.3s;
+ }
 
 .logout-btn {
   padding: 10px 15px;

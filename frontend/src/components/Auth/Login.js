@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import './Modal.css'; // Custom CSS for modal styling
+import './Modal.css'; 
 
 Modal.setAppElement('#root'); // Accessibility feature to avoid issues with screen readers
 
@@ -51,10 +51,35 @@ function Login() {
   return (
     <div>
       <button onClick={toggleModal} className="btn">Login</button>
-      <Modal isOpen={isOpen} onRequestClose={toggleModal} contentLabel="Login Modal">
+      <Modal isOpen={isOpen} onRequestClose={toggleModal} contentLabel="Login Modal" style={{
+                overlay: {
+                  position: 'fixed',
+                  zIndex: 1020,
+                  top: 0,
+                  left: 0,
+                  width: '100vw',
+                  height: '100vh',
+                  background: 'rgba(255, 255, 255, 0.75)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                },
+                content: {
+                  background: 'white',
+                  width: '30rem',
+                  height:'35rem',
+                  maxWidth: 'calc(100vw - 2rem)',
+                  maxHeight: 'calc(100vh - 2rem)',
+                  overflowY: 'auto',
+                  position: 'relative',
+                  justifyContent: 'center',
+                  border: '1px solid #ccc',
+                  borderRadius: '0.3rem',
+                }}}>
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
-          <input
+          <input 
+            className='input-login'
             type="email"
             name="email"
             placeholder="Email"
@@ -63,6 +88,7 @@ function Login() {
             required
           />
           <input
+            className='input-login'
             type="password"
             name="password"
             placeholder="Password"
@@ -70,7 +96,7 @@ function Login() {
             onChange={handleChange}
             required
           />
-          <button type="submit">Submit</button>
+          <button type="submit" className='submit-btn'>Submit</button>
         </form>
         {message && <p>{message}</p>}
         <button onClick={toggleModal} className="btn">Close</button>

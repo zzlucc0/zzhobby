@@ -49,7 +49,31 @@ function Register() {
   return (
     <div>
       <button onClick={toggleModal} className="btn">Sign Up</button>
-      <Modal isOpen={isOpen} onRequestClose={toggleModal} contentLabel="Sign Up Modal">
+      <Modal isOpen={isOpen} onRequestClose={toggleModal} contentLabel="Sign Up Modal" style={{
+                overlay: {
+                  position: 'fixed',
+                  zIndex: 1020,
+                  top: 0,
+                  left: 0,
+                  width: '100vw',
+                  height: '100vh',
+                  background: 'rgba(255, 255, 255, 0.75)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                },
+                content: {
+                  background: 'white',
+                  width: '30rem',
+                  height:'35rem',
+                  maxWidth: 'calc(100vw - 2rem)',
+                  maxHeight: 'calc(100vh - 2rem)',
+                  overflowY: 'auto',
+                  position: 'relative',
+                  justifyContent: 'center',
+                  border: '1px solid #ccc',
+                  borderRadius: '0.3rem',
+                }}}>
         <h2>Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <input
