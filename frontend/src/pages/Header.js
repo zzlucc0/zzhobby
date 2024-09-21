@@ -8,15 +8,15 @@ function Header() {
   const [username, setUsername] = useState(null);
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
+    const storedUsername = sessionStorage.getItem('username');
     if (storedUsername) {
       setUsername(storedUsername);
     }
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('username');
     alert('Logged out successfully');
     window.location.reload();
   };

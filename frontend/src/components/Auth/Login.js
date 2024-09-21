@@ -33,14 +33,13 @@ function Login() {
       });
 
       const data = await response.json();
-
+   
       if (response.ok) {
-        // Assume the backend sends back a token and username
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('username', data.username);
+        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('username', data.username);
         setMessage('Login successful');
         toggleModal();
-        window.location.reload(); // Reload to update login status
+        window.location.reload(); 
       } else {
         setMessage(data.message || 'Invalid email or password');
       }

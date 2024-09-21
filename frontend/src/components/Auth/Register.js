@@ -33,8 +33,8 @@ function Register() {
 
       if (response.ok) {
         // Assuming the backend returns a token and username
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('username', data.username);
+        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('username', data.username);
         setMessage('Sign up successful');
         toggleModal();
         window.location.reload(); // Reload to update login status
