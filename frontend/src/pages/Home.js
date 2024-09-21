@@ -2,16 +2,16 @@ import React,{ useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination,Autoplay } from 'swiper/modules';
+import Header from './Header';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import Login from '../components/Auth/Login'; // Import Login
-import Register from '../components/Auth/Register'; // Import Register
+import Login from '../components/Auth/Login'; 
+import Register from '../components/Auth/Register'; 
 
 const modelImages = [
   "/images/model_kit_1.webp",
-  "/images/model_kit_2.webp",
-  "/images/model_kit_3.webp"
+  "/images/model_kit_2.webp"
 ];
 
 function HomePage() {
@@ -34,7 +34,7 @@ function HomePage() {
 
   return (
     <div className="homepage">
-      <header className="header">
+      {/* <header className="header">
         <img src="/images/logo.png" alt="Logo" className="logo" />
         <h1 className="welcome">Welcome to ZzHobby</h1>
         {token ? (
@@ -50,9 +50,9 @@ function HomePage() {
             <Register /> 
           </div>
         )}
-      </header>
+      </header> */}
+      <Header /> 
       <div className="main-content">
-        <h2>Model Kit Showcase</h2>
         <Swiper
           spaceBetween={30}
           slidesPerView={1}

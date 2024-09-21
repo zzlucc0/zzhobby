@@ -8,10 +8,10 @@ body {
 }
 
 .header {
-  background-color: #e0f7fa; /* Light and fresh color */
+  background-color: #e0f7fa; 
   /* background-image: url("../public/images/logo.png");  */
-  background-size: cover; /* Stretch the logo to cover the entire header */
-  background-repeat: no-repeat; /* Prevent repeating if cover is used */
+  background-size: cover; 
+  background-repeat: no-repeat; 
   background-position: center;
   display: flex;
   justify-content: space-between;
@@ -23,7 +23,7 @@ body {
 .logo {
   width: 150px;
   height: auto;
-  position: absolute;
+  position: flex;
   top: 0.05px;
   left: 28%;
 }
@@ -37,6 +37,9 @@ body {
 }
 
 .welcome-text {
+  background-color: #c82333;
+  position: flex;
+  top: 20%;
   font-size: 1.2rem;
   margin-left: 20px;
   color: #333;
