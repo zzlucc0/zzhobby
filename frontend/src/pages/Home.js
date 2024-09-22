@@ -6,8 +6,8 @@ import Header from './Header';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import Login from '../components/Auth/Login'; 
-import Register from '../components/Auth/Register'; 
+import CreatePost from '../components/Post/CreatePost'; 
+import PostList from '../components/Post/PostList';
 
 const modelImages = [
   "/images/model_kit_1.webp",
@@ -70,6 +70,10 @@ function HomePage() {
             </SwiperSlide>
           ))}
         </Swiper>
+      </div>
+      <div className="main-content">
+        <CreatePost /> 
+        <PostList /> 
       </div>
     </div>
   );

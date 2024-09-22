@@ -5,6 +5,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const connectDB = require('./config/db');
 const cors = require('cors');
+const postRoutes = require('./routes/postRoutes');
 
 
 dotenv.config();
@@ -21,8 +22,9 @@ app.use(express.json());
 
 const authRoutes = require('./routes/authRoutes');
 
-// 使用路由
+
 app.use('/auth', authRoutes); 
+app.use('/posts', postRoutes);
 
 const server = http.createServer(app);
 const io = new Server(server, {

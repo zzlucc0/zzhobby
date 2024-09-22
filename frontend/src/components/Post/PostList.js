@@ -1,33 +1,33 @@
-// src/components/Post/PostList.js
 import React, { useEffect, useState } from 'react';
-import api from '../../api';
 
 function PostList() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await api.get('/posts');
-        setPosts(res.data);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    };
-
+    async function fetchPosts() {
+      const response = await fetch('http://localhost:5000/posts');
+      const data = await response.json();
+      setPosts(data);
+    }
     fetchPosts();
   }, []);
 
   return (
     <div>
-      <h2>Posts</h2>
-      <ul>
-        {posts.map((post) => (
-          <li key={post._id}>
-            <p>{post.content}</p>
-          </li>
-        ))}
-      </ul>
+      {posts.map(post => (
+        <div key={post._id}>
+          <h2>{post.title}</h2>
+          <p>{post.content}</p>
+          {post.media && post.media.map((mediaItem, index) => (
+            <img key={index} src={mediaItem.url} alt={mediaItem.type} />
+          ))}
+          <div>
+            {post.comments.map(comment => (
+              <p key={comment._id}>{comment.comment}</p>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
