@@ -15,7 +15,8 @@ const modelImages = [
 ];
 
 function HomePage() {
-  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem('token');
   // const username = localStorage.getItem('username');
   const [username, setUsername] = useState(null);
   useEffect(() => {
@@ -32,25 +33,16 @@ function HomePage() {
     window.location.reload();
   };
 
+  const handleCreatePost = () => {
+    if (token) {
+      navigate('/create-post'); 
+    } else {
+      navigate('/login'); 
+    }
+  };
+
   return (
     <div className="homepage">
-      {/* <header className="header">
-        <img src="/images/logo.png" alt="Logo" className="logo" />
-        <h1 className="welcome">Welcome to ZzHobby</h1>
-        {token ? (
-          <div className="user-info">
-            <span className="welcome-text">Hi, {username}</span>
-            <button className="btn logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        ) : (
-          <div className="auth-buttons">
-            <Login />  
-            <Register /> 
-          </div>
-        )}
-      </header> */}
       <Header /> 
       <div className="main-content">
         <Swiper
@@ -72,7 +64,9 @@ function HomePage() {
         </Swiper>
       </div>
       <div className="main-content">
-        <CreatePost /> 
+        <button onClick={handleCreatePost} className="btn">
+          Create Post
+        </button>
         <PostList /> 
       </div>
     </div>

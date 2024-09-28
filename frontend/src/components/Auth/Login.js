@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import './Modal.css'; 
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root'); // Accessibility feature to avoid issues with screen readers
 
@@ -8,7 +9,7 @@ function Login() {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
-
+  const navigate = useNavigate();
   // Toggle modal open/close
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -39,6 +40,7 @@ function Login() {
         sessionStorage.setItem('username', data.username);
         setMessage('Login successful');
         toggleModal();
+        navigate('/');
         window.location.reload(); 
       } else {
         setMessage(data.message || 'Invalid email or password');
