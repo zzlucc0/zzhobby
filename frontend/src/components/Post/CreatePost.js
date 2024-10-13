@@ -7,7 +7,7 @@ function CreatePost() {
   const [media, setMedia] = useState([]);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-
+ 
   const handleMediaUpload = (e) => {
     const files = Array.from(e.target.files);
     setMedia(files.map(file => URL.createObjectURL(file)));
